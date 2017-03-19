@@ -1,0 +1,34 @@
+<div ng-show="fetchingPost" class="text-center space-15"><i class="fa fa-refresh fa-spin fa-5x"></i></div>
+<div class="post-feed" ng-show="!fetchingPost">
+    <div class="post-box" ng-repeat="p in posts">
+        <a ng-href="{{p.slug}}" class="post-thumbnail pull-left m-r-md m-b-md">
+            <img class="img-responsive" ng-src="{{p.thumbnail_images.full.url}}" />
+        </a>
+        <div class="post-body">
+            <h2 class="post-title" ng-bind-html="p.title"></h2>
+            <div class="post-by">
+                <span class="text-muted">
+                    <i class="fa fa-clock-o"></i> {{p.date | momentjs}}
+                    <i class="fa fa-user"></i> <a href="">{{p.author.nickname}}</a>
+                </span>
+            </div>
+            <div class="post-excerpt" ng-bind-html="p.excerpt | excerpt:250:p.slug"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="text-center">
+    <div paging
+        page="1"
+        page-size="5"
+        total="numberPost"
+        scroll-top="true"
+        show-prev-next="true"
+        show-first-last="true"
+        text-first="&laquo;"
+        text-last="&raquo;"
+        text-next="&rsaquo;"
+        text-prev="&lsaquo;"
+        paging-action="getPosts(page)">
+    </div>
+</div>
